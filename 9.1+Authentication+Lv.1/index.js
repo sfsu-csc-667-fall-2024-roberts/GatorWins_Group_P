@@ -47,13 +47,35 @@ app.post("/register", async (req, res) => {
   res.render("secrets.ejs");
 
   
+
+  
 });
 
 app.post("/login", async (req, res) => {
   const email = req.body.username;
   const password = req.body.password;
-  console.log(username);
-  console.log(password);
+
+  try{
+    const result = await db.query("SELECT * FROM users WHERE email = $1",[
+      email,
+    ]);
+    if(result.rows.length > 0){
+      console.log(result.rows);
+      const users = result.rows[0];
+      const storePassword = users.password;
+
+      if(password == storePassword){
+        res.render("secrets.ejs");
+      }else{
+        res.send("Incorrect Password");
+      }
+    }else{
+      res.send("Users not found");
+    }
+  }catch(err){
+    console.log(err);
+  }
+  
 
 });
 
