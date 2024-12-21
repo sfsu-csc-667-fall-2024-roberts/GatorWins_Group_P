@@ -14,3 +14,14 @@ body {
   color: #fff;
   background-color: #000;
 }
+
+.secret-text {
+  font-style: italic;
+  color: #ffd700; /* Gold color */
+}
+
+.jumbotron {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  border-radius: 10px;
+}
+
